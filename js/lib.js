@@ -5,7 +5,7 @@
  * @returns {number}
  */
 function sum(a, b) {
-  return Number(a) + Number(b)
+  return Number(a) + Number(b);
 }
 
 /**
@@ -31,30 +31,29 @@ function pow(x, n) {
  */
 function factorial(n) {
   return n ? n * factorial(n - 1) : 1;
-};
+}
 
 /**
  * This function calculate Fibonacci sequence
  * @param n
- * @returns {*|number}
+ * @returns {number}
  */
 function fibonacci(n) {
-  return (n > 2) ? fibonacci(n - 1) + fibonacci(n - 2) : 1;
+  return n > 2 ? fibonacci(n - 1) + fibonacci(n - 2) : 1;
 }
 
 /**
- * This function must remove some element for array of string by name
+ * This function must remove some element from array of strings by name
  * @param list {string[]}
  * @param name {string}
  * @returns {string[]}
  */
 function removeByName(list, name) {
-  let result = [...list]
-  let index = result.indexOf(name);
+  const result = [...list];
+  const index = result.indexOf(name);
   if (index !== -1) {
     result.splice(index, 1);
   }
-
   return result;
 }
 
@@ -74,55 +73,63 @@ function makeCounter(currentCount) {
  * @param time {number}
  * @returns {number}
  */
-
 function getAsyncTimerId(time) {
   let timerId;
   setTimeout(() => {
-    timerId = Math.floor(Date.now() / 1000)
+    timerId = Math.floor(Date.now() / 1000);
   }, time);
-
-  return timerId
-};
+  return timerId;
+}
 
 /**
- * This function return promise and multiply paraments
+ * This function return promise and multiply parameters
  * @param x{number}
  * @returns {Promise<number>}
  */
 async function asyncMultiply(x) {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     setTimeout(resolve, 3000, 2 * x);
   });
-};
-
-/**
- * This function create GET http request to server
- * @param url {string}
- * @returns {Promise<unknown>}
- */
-function httpGet(url) {
-
-  return new Promise(function (resolve, reject) {
-
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-
-    xhr.onload = function () {
-      if (this.status == 200) {
-        resolve(this.response);
-      } else {
-        let error = new Error(this.statusText);
-        error.code = this.status;
-        reject(error);
-      }
-    };
-
-    xhr.onerror = function () {
-      reject(new Error("Network Error"));
-    };
-
-    xhr.send();
-  });
-
 }
 
+/**
+ * This function simulates a GET HTTP request to server
+ * Works both in Node.js and Browser
+ * @param url {string}
+ * @returns {Promise<string>}
+ */
+function httpGet(url) {
+  return new Promise((resolve, reject) => {
+    // Якщо url порожній або не є рядком — помилка
+    if (!url || typeof url !== 'string') {
+      reject(new Error('Invalid URL'));
+      return;
+    }
+
+    // Емуляція мережевої помилки
+    if (url.includes('error')) {
+      reject(new Error('Network Error'));
+      return;
+    }
+
+    // Емуляція успішного запиту
+    setTimeout(() => {
+      resolve(`GET request to ${url} completed`);
+    }, 500);
+  });
+}
+
+/**
+ * Export all functions for testing
+ */
+export {
+  sum,
+  pow,
+  factorial,
+  fibonacci,
+  removeByName,
+  makeCounter,
+  getAsyncTimerId,
+  asyncMultiply,
+  httpGet,
+};

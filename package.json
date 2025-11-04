@@ -1,0 +1,10 @@
+{
+  "type": "module",
+  "scripts": {
+    "test": "mocha js/lib.spec.js --timeout 5000"
+  },
+  "devDependencies": {
+    "chai": "^6.2.0",
+    "mocha": "^11.1.0"
+  }
+}
