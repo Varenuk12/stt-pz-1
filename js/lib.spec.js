@@ -12,9 +12,6 @@ import {
 } from './lib.js';
 
 describe('Test suite for testing lib.js', () => {
-  // ============================
-  // sum()
-  // ============================
   describe('Test suite for testing sum function', () => {
     it('should return sum of two numbers', () => {
       expect(sum(1, 2)).to.equal(3);
@@ -42,6 +39,9 @@ describe('Test suite for testing lib.js', () => {
       expect(pow(3, 2)).to.equal(9);
       expect(pow(5, 0)).to.equal(1);
       expect(pow(10, 1)).to.equal(10);
+      expect(pow(-3, 2)).to.equal(9);
+      expect(pow(-3, 3)).to.equal(-27);
+  
     });
   });
 
@@ -127,7 +127,7 @@ describe('Test suite for testing lib.js', () => {
   });
 
   // ============================
-  // httpGet() — замокуємо XMLHttpRequest
+  // httpGet()
   // ============================
   describe('Test suite for testing httpGet function', () => {
     it('should resolve on success', async () => {
